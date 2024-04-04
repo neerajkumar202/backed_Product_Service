@@ -3,6 +3,7 @@ package com.productservice.backendproductservice.thirdPartyClient.fakeStoreClien
 import com.productservice.backendproductservice.dtos.FakeStoreProductDto;
 import com.productservice.backendproductservice.dtos.GenericProductDto;
 import com.productservice.backendproductservice.exceptions.ProductNotFoundException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -11,21 +12,30 @@ import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class FakeStoreClientAdapter {
+public class FakeStoreClient {
 
 
     private RestTemplateBuilder restTemplateBuilder;// use to call the external api
 
-    FakeStoreClientAdapter(RestTemplateBuilder restTemplateBuilder) {
+    FakeStoreClient(RestTemplateBuilder restTemplateBuilder,
+                  //  @Value("${fakestore.api.url}") String fakeStoreUrl,
+                   // @Value("${fakestore.api.paths.products}") String pathForProducts
+
+    ) {
         this.restTemplateBuilder = restTemplateBuilder;
+        this.genericProductUrl = fakeStoreUrl + pathForProducts;
+        this.specificProductUrl =fakeStoreUrl + pathForProducts +"/{id}";
     }
 
-    private String specificProductUrl = "https://fakestoreapi.com/products/{id}";
-    private String genericProductUrl = "https://fakestoreapi.com/products";
+    //@Value("${fakestore.api.url}") we gonna initialize it in constructor
+    private String fakeStoreUrl;
+    //@Value("${fakestore.api.paths.products}") we gonna initialize it in constructor
+    private String pathForProducts;
+    private String specificProductUrl ;
+    private String genericProductUrl ;
 
 
 
