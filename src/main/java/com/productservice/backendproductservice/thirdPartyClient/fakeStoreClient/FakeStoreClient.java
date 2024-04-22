@@ -20,7 +20,7 @@ public class FakeStoreClient {
 
     private RestTemplateBuilder restTemplateBuilder;// use to call the external api
 
-    FakeStoreClient(RestTemplateBuilder restTemplateBuilder,
+    FakeStoreClient(RestTemplateBuilder restTemplateBuilder
                   //  @Value("${fakestore.api.url}") String fakeStoreUrl,
                    // @Value("${fakestore.api.paths.products}") String pathForProducts
 
